@@ -1,0 +1,1 @@
+export const ENROLL_COURSE = 'ENROLL_COURSE'
