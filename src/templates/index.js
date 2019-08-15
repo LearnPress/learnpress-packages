@@ -1,3 +1,5 @@
+export {default as Hooks} from "./hooks.js"
+export {default as Index} from "./index.js"
 export {default as SingleCourse_Buttons_Enroll} from "./single-course/buttons/enroll.js"
 export {default as SingleCourse_Buttons_Purchase} from "./single-course/buttons/purchase.js"
 export {default as SingleCourse_Buttons_Submit} from "./single-course/buttons/submit.js"
@@ -12,6 +14,10 @@ export {default as SingleCourse_Progress} from "./single-course/progress.js"
 export {default as SingleCourse_Quiz_Buttons_Start} from "./single-course/quiz/buttons/start.js"
 export {default as SingleCourse_Quiz_Content} from "./single-course/quiz/content.js"
 export {default as SingleCourse_Quiz_Index} from "./single-course/quiz/index.js"
+export {default as SingleCourse_Section_Index} from "./single-course/section/index.js"
 export {default as SingleCourse_Tabs_Index} from "./single-course/tabs/index.js"
+export {default as SingleCourse_Tabs_TabCurriculum} from "./single-course/tabs/tab-curriculum.js"
+export {default as SingleCourse_Tabs_TabInstructor} from "./single-course/tabs/tab-instructor.js"
+export {default as SingleCourse_Tabs_TabOverview} from "./single-course/tabs/tab-overview.js"
 // For watching files change
-// export const rand = function(){ return 0.4288432289387054}
+// export const rand = function(){ return 0.34477967656057684}

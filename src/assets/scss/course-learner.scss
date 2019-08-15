@@ -1,0 +1,7 @@
+.course-section {
+    &.closed {
+        .course-items {
+            display: none;
+        }
+    }
+}

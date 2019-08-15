@@ -1,13 +1,23 @@
 import {Component} from '@wordpress/element';
-import Template from '../../../components/template';
-const hooks = wp;
+import {compose} from '@wordpress/compose';
+import {withSelect, withDispatch} from '@wordpress/data';
+import {Template} from '@learnpress/components';
 
 class PlayerLanding extends Component {
     constructor() {
         super(...arguments)
         this.state = {
-            message: 'Hello World!'
+            message: '[LANDING]'
         }
+
+        this.enrollCourse = this.enrollCourse.bind(this);
+    }
+
+    enrollCourse() {
+        this.props.enrollCourse({
+            userId: 10,
+            courseId: 1000
+        })
     }
 
     componentDidMount() {
@@ -15,10 +25,30 @@ class PlayerLanding extends Component {
     }
 
     render() {
+
         return <>
-        {Template.get('/single-course/content-landing.js', this)}
+        <h4>{this.state.message}</h4>
+        {
+            Template.get('/single-course/content-landing.js', {
+                enrollCourse: this.enrollCourse
+            })
+        }
         </>
     }
 }
 
-export default PlayerLanding
+export default compose([
+    withSelect((select) => {
+
+    }),
+
+    withDispatch((dispatch) => {
+        const {
+            enrollCourse
+        } = dispatch('course-learner/course')
+
+        return {
+            enrollCourse
+        }
+    })
+])(PlayerLanding);

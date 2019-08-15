@@ -1,27 +1,33 @@
 //export {default as CourseCurriculum} from './curriculum';
-export { default as Curriculum } from './curriculum';
+export * from './components';
 const {Component} = wp.element;
+import {withDispatch, withSelect} from '@wordpress/data';
+import {compose} from '@wordpress/compose';
 
 class CourseCurriculum extends Component{
     constructor(){
-        super(...arguments)
+        super(...arguments);
+        this.state = {
+            x: 0
+        }
     }
 
     render(){
         const {userData} = this.props;
         return <>
-        <ul>
-            {console.time('X')}
-            {
-                !!userData && Object.values(userData.items).map((item) => {
-                    return <li>
-                        <a>{item.name} [#{item.userSettings.item_id}]</a>
-                    </li>
-                })
-            }
-            {console.timeEnd('X')}
-        </ul>
+        {
+            LP.components.Template.get('single-course/tabs/tab-curriculum.js', {...this.state, ...this.props})
+        }
         </>
     }
 }
-export default CourseCurriculum;
+
+export default compose([
+    withSelect((select) => {
+        const {getCourseSections, getUserItems} = select('course-learner/course');
+        return {
+            sections: getCourseSections(),
+            items: getUserItems()
+        }
+    })
+])(CourseCurriculum);

@@ -1,7 +1,7 @@
 {
 	"name": "@learnpress/dependency-extraction-webpack-plugin",
-	"version": "1.0.1",
-	"description": "Extract LearnPress script dependencies from webpack bundles.",
+	"version": "1.0.0",
+	"description": "Extract LearnPress script dependencies from webpack bundles. (Fork from https://github.com/WordPress/gutenberg/tree/master/packages/dependency-extraction-webpack-plugin)",
 	"author": "The WordPress Contributors",
 	"license": "GPL-2.0-or-later",
 	"keywords": [
@@ -9,7 +9,7 @@
 		"webpack",
 		"dependency"
 	],
-	"homepage": "https://github.com/LearnPress/packages/tree/master/packages/dependency-extraction-webpack-plugin/README.md",
+	"homepage": "https://github.com/LearnPress/packages/tree/master/src/packages/dependency-extraction-webpack-plugin/README.md",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/LearnPress/packages.git",

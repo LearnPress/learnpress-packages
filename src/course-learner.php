@@ -9,21 +9,61 @@
  *
  * @package LearnPress
  */
+function cln_get_asset_url( $url ) {
+	$url = plugins_url( $url, __FILE__ );
+
+	return learn_press_is_debug() ? add_query_arg( 'no-cache', microtime( true ), $url ) : $url;
+}
 
 function cln_enqueue_scripts() {
-	wp_enqueue_script( 'course-curriculum', plugins_url( 'assets/js/course-curriculum.js', __FILE__ ), array(
+	$dependencies = array(
 		'wp-element',
 		'wp-utils',
 		'wp-compose',
 		'wp-data',
 		'wp-hooks',
 		'lodash'
-	) );
-	wp_enqueue_script( 'course-components', plugins_url( 'assets/js/components.js', __FILE__ ) );
-	wp_enqueue_script( 'course-templates', plugins_url( 'templates/build/index.js', __FILE__ ) );
-	//wp_enqueue_script( 'course-template', plugins_url( 'templates/build/template.js', __FILE__ ) );
-	wp_enqueue_script( 'course-progress', plugins_url( 'assets/js/course-progress.js', __FILE__ ) );
-	wp_enqueue_script( 'course-learner', plugins_url( 'assets/js/course-learner.js', __FILE__ ) );
+	);
+
+	wp_enqueue_script( 'wp-element' );
+
+	foreach ( $dependencies as $handle ) {
+		wp_enqueue_script( $handle );
+	}
+
+	$packages         = array(
+		'course-hooks'      => 'templates/hooks.js',
+		'lp-utils'          => 'utils',
+		'course-components' => 'components',
+		'lp-blocks'         => 'blocks',
+		'course-overview',
+		'course-progress',
+		'course-curriculum',
+		'course-learner',
+		'course-templates'  => 'templates/build/index.js',
+	);
+	$loadDependencies = true;
+	foreach ( $packages as $handle => $package ) {
+		if ( is_numeric( $handle ) ) {
+			$handle = $package;
+		}
+
+		$url = preg_match( '/.js$/', $package ) ? $package : 'assets/js/' . $package . '.js';
+
+		wp_enqueue_script( $handle, cln_get_asset_url( $url ), $loadDependencies ? $dependencies : array() );
+		$loadDependencies = false;
+	}
+
+//	wp_enqueue_script( 'course-curriculum', cln_get_asset_url( 'assets/js/course-curriculum.js' ) );
+//	wp_enqueue_script( 'lp-utils', cln_get_asset_url( 'assets/js/utils.js' ) );
+//	wp_enqueue_script( 'blocks', cln_get_asset_url( 'assets/js/blocks.js' ) );
+//	wp_enqueue_script( 'course-overview', cln_get_asset_url( 'assets/js/course-overview.js' ) );
+//	wp_enqueue_script( 'course-components', cln_get_asset_url( 'assets/js/components.js' ) );
+//	wp_enqueue_script( 'course-templates', cln_get_asset_url( 'templates/build/index.js' ) );
+//	wp_enqueue_script( 'course-progress', cln_get_asset_url( 'assets/js/course-progress.js' ) );
+//	wp_enqueue_script( 'course-learner', cln_get_asset_url( 'assets/js/course-learner.js' ) );
+	// css
+	wp_enqueue_style( 'course-learner', cln_get_asset_url( 'assets/css/course-learner.css' ) );
 }
 
 add_action( 'wp_enqueue_scripts', 'cln_enqueue_scripts' );
@@ -46,16 +86,16 @@ function cln_get_course_sections_array( $id ) {
 
 			if ( $items = $section->get_items() ) {
 				foreach ( $items as $item ) {
-					$theItem = array(
-						'id'        => $item->get_id(),
-						'title'     => $item->get_title(),
-						'name'      => get_post_field( 'post_name', $item->get_id() ),
-						'permalink' => $item->get_permalink(),
-						'type'      => $item->get_item_type(),
-						'isPreview' => $item->is_preview()
-					);
+//					$theItem = array(
+//						'id'        => $item->get_id(),
+//						'title'     => $item->get_title(),
+//						'name'      => get_post_field( 'post_name', $item->get_id() ),
+//						'permalink' => $item->get_permalink(),
+//						'type'      => $item->get_item_type(),
+//						'isPreview' => $item->is_preview()
+//					);
 
-					$theSection['items'][] = apply_filters( 'learn-press/course-learner-item-settings', $theItem );
+					$theSection['items'][] = apply_filters( 'learn-press/course-learner-item-settings', $item->get_id() );
 				}
 			}
 
@@ -70,51 +110,87 @@ function cln_get_course_settings( $id ) {
 	global $wpdb;
 	$course = learn_press_get_course( $id );
 
-	$courseSettings = array(
-		'duration'         => $course->get_duration(),
-		'maxStudents'      => $course->get_max_students(),
-		'enrolledStudents' => $course->get_users_enrolled(),
-		'retakeCourse'     => $course->get_retake_count(),
-		'externalLink'     => $course->get_external_link(),
-		'passingGrade'     => $course->get_passing_condition(),
-		'passingGradeBy'   => 0,
-		'coursePrices'     => array(
-			'price'         => $course->get_price(),
-			'salePrice'     => $course->get_sale_price(),
-			'originalPrice' => $course->get_origin_price()
-		),
-		'requiredEnroll'   => $course->is_required_enroll(),
-		'courseAuthor'     => array(
-			'id'   => $course->get_author( 'id' ),
-			'user' => $course->get_author( 'user_login' ),
-			'name' => $course->get_author_display_name()
-		),
-		'courseStatus'     => get_post_status( $id ),
-		'courseSections'   => cln_get_course_sections_array( $id ),
-		'courseTabs'       => learn_press_get_course_tabs()
-	);
+	global $wp_filter;
+
+	if ( ! empty( $wp_filter['the_content'] ) ) {
+		$callbacks = $wp_filter['the_content']->callbacks;
+	}
+
+	remove_filter( 'the_content', array( LP_Page_Controller::instance(), 'single_content' ), 10000 );
+
+	if ( $course ) {
+		$courseSettings = array(
+			'duration'         => $course->get_duration(),
+			'maxStudents'      => $course->get_max_students(),
+			'enrolledStudents' => $course->get_users_enrolled(),
+			'retakeCourse'     => $course->get_retake_count(),
+			'externalLink'     => $course->get_external_link(),
+			'passingGrade'     => $course->get_passing_condition(),
+			'passingGradeBy'   => 0,
+			'coursePrices'     => array(
+				'price'         => $course->get_price(),
+				'salePrice'     => $course->get_sale_price(),
+				'originalPrice' => $course->get_origin_price()
+			),
+			'requiredEnroll'   => $course->is_required_enroll(),
+			'courseAuthor'     => array(
+				'id'   => $course->get_author( 'id' ),
+				'user' => $course->get_author( 'user_login' ),
+				'name' => $course->get_author_display_name()
+			),
+			'courseStatus'     => get_post_status( $id ),
+			'courseSections'   => cln_get_course_sections_array( $id ),
+			'courseTabs'       => learn_press_get_course_tabs(),
+			'courseContent'    => apply_filters( 'the_content', get_post_field( 'post_content', $id ) ),
+			'userData'         => cln_get_user_course( $id )
+		);
+	} else {
+		$courseSettings = false;
+	}
+
+	if ( isset( $callbacks ) ) {
+		$wp_filter['the_content']->callbacks = $callbacks;
+	}
 
 	return apply_filters( 'learn-press/course-learner-settings', $courseSettings, $id );
 }
 
 function cln_get_user_course( $id ) {
-	$data       = array();
+
 	$course     = learn_press_get_course( $id );
 	$items      = $course->get_items();
 	$user       = learn_press_get_current_user();
 	$courseData = $user->get_course_data( $id );
 
+	$data = array(
+		'isLoggedIn'  => is_user_logged_in(),
+		'accessLevel' => 0,//$user->get_course_access_level( $id ),
+		'courseItems' => array()
+	);
+
 	foreach ( $items as $item_id ) {
-		$item                      = $course->get_item( $item_id );
-		$courseItem                = $courseData ? $courseData->get_item( $item_id ) : false;
-		$data['items'][ $item_id ] = array(
-			'name'         => $item->get_title(),
-			'id'           => $item_id,
-			'settings'     => array_merge(
-				$course->get_item( $item_id )->get_data(),
-				array( 'name' => $item->get_title() )
+		$item           = $course->get_item( $item_id );
+		$courseItem     = $courseData ? $courseData->get_item( $item_id ) : false;
+		$courseItemData = array();
+
+		if ( $courseItem ) {
+			$courseItemData = array(
+				'startTime'      => $courseItem->get_start_time() ? $courseItem->get_start_time()->toSql() : false,
+				'startTimeGmt'   => $courseItem->get_start_time_gmt() ? $courseItem->get_start_time_gmt()->toSql() : false,
+				'endTime'        => $courseItem->get_end_time() ? $courseItem->get_end_time()->toSql() : false,
+				'endTimeGmt'     => $courseItem->get_end_time_gmt() ? $courseItem->get_end_time_gmt()->toSql() : false,
+				'expirationTime' => $courseItem->get_expiration_time() ? $courseItem->get_expiration_time()->toSql() : false
+			);
+		}
+
+		$data['courseItems'][ $item_id ] = array_merge(
+			array(
+				'name'      => $item->get_title(),
+				'permalink' => $item->get_permalink(),
+				'id'        => absint( $item_id )
 			),
-			'userSettings' => $courseItem ? $courseItem->get_data() : array()
+			$course->get_item( $item_id )->get_data(),
+			array( 'userSettings' => $courseItemData )
 		);
 	}
 
@@ -124,10 +200,12 @@ function cln_get_user_course( $id ) {
 function cln_output_main_script() {
 	global $post;
 
-	$courseSettings = cln_get_course_settings( $post->ID );
-	$userSettings   = cln_get_user_course( $post->ID );
+	if ( learn_press_is_course() ) {
 
-	$init_script = <<<JS
+		$courseSettings = cln_get_course_settings( $post->ID );
+		$userSettings   = cln_get_user_course( $post->ID );
+
+		$init_script = <<<JS
 ( function() {
 	window._lpCourseLearner = new Promise( function( resolve ) {
 		jQuery( function() {
@@ -137,14 +215,15 @@ function cln_output_main_script() {
 } )();
 JS;
 
-	$script = sprintf(
-		$init_script,
-		$post->ID,
-		wp_json_encode( $courseSettings, learn_press_is_debug() ? JSON_PRETTY_PRINT : 0 ),
-		wp_json_encode( $userSettings, learn_press_is_debug() ? JSON_PRETTY_PRINT : 0 )
-	);
+		$script = sprintf(
+			$init_script,
+			$post->ID,
+			wp_json_encode( $courseSettings, learn_press_is_debug() ? JSON_PRETTY_PRINT : 0 ),
+			wp_json_encode( array(), learn_press_is_debug() ? JSON_PRETTY_PRINT : 0 )
+		);
 
-	wp_add_inline_script( 'course-learner', $script );
+		wp_add_inline_script( 'course-learner', $script );
+	}
 
 	return func_get_arg( 0 );
 }
@@ -179,5 +258,20 @@ if ( 1 ) {
 }
 
 add_action( 'wp_print_scripts', function () {
-	wp_deregister_script( 'learn-press-course' );
+	//wp_deregister_script( 'course' );
+}, 100 );
+
+add_shortcode( 'simple_learner', function () {
+	ob_start();
+	print_r( func_get_args() );
+
+	return ob_get_clean();
+} );
+
+add_action( 'init', function () {
+	$tabs = array_keys( learn_press_get_course_tabs() );
+
+	foreach ( array_reverse( $tabs ) as $tabId ) {
+		add_rewrite_endpoint( $tabId, EP_PERMALINK | EP_PAGES );
+	}
 } );

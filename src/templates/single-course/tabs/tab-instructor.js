@@ -1,12 +1,11 @@
 import CourseCurriculum from '@learnpress/course-curriculum';
-import {Section} from '@learnpress/course-curriculum';
 
 
-window.learn_press_course_curriculum_tab = function (props) {
+window.learn_press_course_instructor_tab = function (props) {
     return <CourseCurriculum {...props}/>;
 }
 
-class TabCurriculum extends wp.element.Component {
+class TabInstructor extends wp.element.Component {
 
 
     render() {
@@ -23,4 +22,4 @@ class TabCurriculum extends wp.element.Component {
     }
 }
 
-export default TabCurriculum;
+export default TabInstructor;

@@ -3,9 +3,6 @@ import {Component, createContext} from '@wordpress/element';
 import {withDispatch, withSelect} from '@wordpress/data';
 
 import PlayerMode from './components/player-mode';
-import CourseProgress from '@learnpress/course-progress';
-import CourseCurriculum from '@learnpress/course-curriculum';
-import PrettyJSON from '../components/pretty-json';
 import {PlayerLanding, PlayerLearning} from './components/player-mode';
 import './store';
 
@@ -23,8 +20,9 @@ class Player extends Component {
     }
 
     componentDidMount() {
-        const {initUserData} = this.props;
+        const {initUserData, settings} = this.props;
         this.props.setUserData(initUserData);
+        this.props.setCourseData(settings);
     }
 
     render() {
@@ -39,37 +37,43 @@ class Player extends Component {
             <Provider value={ this.props }>
                 <PlayerMode>
 
-                    {!this.props.playerMode && <PlayerLanding {...this.props}/>}
-                    {this.props.playerMode && <PlayerLearning />}
+                    {this.props.accessLevel >= 20 && <PlayerLearning {...this.props}/>}
 
-                    <CourseCurriculum {...this.props}/>
-                    <CourseProgress />
+                    {this.props.accessLevel < 20 && <PlayerLanding {...this.props}/>}
+
                 </PlayerMode>
             </Provider>
         )
     }
 }
+
+export {Consumer};
+
 //export default Player;
 export default compose(
     withSelect((select) => {
         const {
             getUserData,
-        } = select('course-learner/index');
+            getAccessLevel
+        } = select('course-learner/course');
 
         return {
             userData: getUserData(),
+            accessLevel: getAccessLevel(),
             playerMode: false
         };
     }),
     withDispatch((dispatch) => {
         const {
             setUserData,
-            setItemData
-        } = dispatch('course-learner/index');
+            setItemData,
+            setCourseData
+        } = dispatch('course-learner/course');
 
         return {
             setUserData,
             setItemData,
+            setCourseData
         };
     }),
 )(Player);

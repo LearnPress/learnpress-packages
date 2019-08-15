@@ -1,9 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
+const CopyPlugin = require('copy-webpack-plugin');
 const CustomTemplatedPathPlugin = require('@wordpress/custom-templated-path-webpack-plugin');
 const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extraction-webpack-plugin');
 const LearnPressCustomTemplatedPathPlugin = require('@learnpress/custom-templated-path-webpack-plugin');
 const LearnPressDependencyExtractionWebpackPlugin = require('@learnpress/dependency-extraction-webpack-plugin');
+const MergeIntoSingleFilePlugin = require('webpack-merge-and-include-globally');
 
 const {get, escapeRegExp, compact} = require('lodash');
 const {basename, sep} = require('path');
@@ -44,7 +46,10 @@ const packages = {
     'course-learner': `file:${packageDir}packages/course-learner`,
     'course-curriculum': `file:${packageDir}packages/course-curriculum`,
     'course-progress': `file:${packageDir}packages/course-progress`,
+    'course-overview': `file:${packageDir}packages/course-overview`,
+    'blocks': `file:${packageDir}packages/blocks`,
     'components': `file:${packageDir}packages/components`,
+    'utils': `file:${packageDir}packages/utils`,
 };
 
 const editorPackages = Object.keys(packages);
@@ -141,6 +146,32 @@ module.exports = function (env = {environment: "production", watch: false, build
                 library: 'LP'
             }),
 
+            new CopyPlugin(editorPackages.map((name)=>{
+                return {
+                    from: packageDir+`/packages/${name}/package.json`,
+                    to: path.resolve(__dirname, 'build')+`/${name}/`
+                }
+            }).concat(editorPackages.map((name)=>{
+                return {
+                    from: path.resolve(__dirname, 'build')+`/${name}/index.js.map`,
+                    to: packageDir+`/assets/js/${name}.js.map`
+                }
+            }))),
+
+            new MergeIntoSingleFilePlugin({
+                files: editorPackages.reduce((memo, packageName) => {
+                    const name = `../src/assets/js/${ packageName }.js`;
+                    memo[name] = [__dirname+`/build/${packageName}/index.js`];
+                    return memo;
+                }, {}),
+                transform: editorPackages.reduce((memo, packageName) => {
+                    const name = `../src/assets/js/${ packageName }.js`;
+                    memo[name] = function(code){
+                        return code.replace(/index.js.map/, `${packageName}.js.map`);
+                    }
+                    return memo;
+                }, {})
+            })
             //blocksCSSPlugin,
         ],
         devtool

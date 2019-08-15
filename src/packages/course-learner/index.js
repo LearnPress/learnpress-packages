@@ -1,6 +1,8 @@
 import CourseCurriculum from '@learnpress/course-curriculum';
 import {Curriculum} from '@learnpress/course-curriculum';
 
+export * from './components';
+
 const {element} = wp;
 
 import Player from './player';

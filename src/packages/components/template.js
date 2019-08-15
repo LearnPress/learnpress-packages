@@ -24,10 +24,10 @@ export default {
     /**
      *
      * @param name
-     * @param _this
+     * @param props
      * @return {string}
      */
-    get(name, _this){
+    get(name, props){
         name = getPackageName(name.replace(/^\//, ''));
         let instance = LP['Templates'][name];
 
@@ -35,6 +35,6 @@ export default {
             return '';
         }
 
-        return React.createElement(instance, null);
+        return wp.element.createElement(instance, props);
     }
 }

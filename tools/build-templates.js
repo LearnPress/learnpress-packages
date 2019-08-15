@@ -45,6 +45,8 @@ const packages = {
     'course-learner': `file:${packageDir}packages/course-learner`,
     'course-curriculum': `file:${packageDir}packages/course-curriculum`,
     'course-progress': `file:${packageDir}packages/course-progress`,
+    'course-overview': `file:${packageDir}packages/course-overview`,
+    'blocks': `file:${packageDir}packages/blocks`,
     'components': `file:${packageDir}packages/components`,
 };
 
