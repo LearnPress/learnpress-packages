@@ -1,3 +1,6 @@
+import {compose} from '@wordpress/compose';
+import {withDispatch, withSelect} from '@wordpress/data';
+
 const {Component} = wp.element;
 const {isNumber} = lodash;
 
@@ -32,7 +35,7 @@ class CourseSection extends Component {
             return '';
         }
 
-        return <h4>
+        return <h4 key={ item.id }>
             <a href={item.permalink}>{item.name}</a>
         </h4>
     }
@@ -53,10 +56,32 @@ class CourseSection extends Component {
             className
         }
 
-        return <>
-        {LP.components.Template.get('single-course/section', props)}
-        </>
+        return <div key={ section.id }>
+            {LP.components.Template.get('single-course/section', props)}
+        </div>
     }
 }
 
-export default CourseSection
+export default compose([
+    withSelect((select) => {
+        const {
+            getCompletedItems,
+            isOpeningCourseItem
+        } = select('course-learner/course');
+
+        return {
+            completedItems: getCompletedItems(),
+            activeCourseItem: isOpeningCourseItem()
+        }
+    }),
+
+    withDispatch((dispatch) => {
+        const {
+            openCourseItem
+        } = dispatch('course-learner/course');
+
+        return {
+            openCourseItem
+        }
+    })
+])(CourseSection);

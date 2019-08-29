@@ -1,0 +1,18 @@
+{
+  "packages": {
+    "core": "file:packages/core",
+    "course-user": "file:packages/course-user",
+    "course-learner": "file:packages/course-learner",
+    "course-curriculum": "file:packages/course-curriculum",
+    "course-progress": "file:packages/course-progress",
+    "course-overview": "file:packages/course-overview",
+    "course-lesson": "file:packages/course-lesson",
+    "course-quiz": "file:packages/course-quiz",
+    "blocks": "file:packages/blocks",
+    "components": "file:packages/components",
+    "data-controls": "file:packages/data-controls",
+    "data": "file:packages/data",
+    "notices": "file:packages/notices",
+    "utils": "file:packages/utils"
+  }
+}

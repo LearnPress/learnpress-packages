@@ -1,7 +1,69 @@
+@import "mixins";
+
 .course-section {
+    .course-item {
+        .item-title {
+            font-weight: normal;
+        }
+        &.active {
+            .item-title {
+                font-weight: bold;
+            }
+        }
+    }
+
     &.closed {
         .course-items {
             display: none;
+        }
+    }
+}
+
+#course-player {
+    &.isOpenItem {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 999999;
+        background: #FFF;
+    }
+    #course-popup {
+        @include position();
+    }
+
+    #course-popup__header {
+        position: absolute;
+        height: 70px;
+        left: 0;
+        right: 0;
+        top: 0;
+        background: #e7f7ff;
+    }
+
+    #course-popup__wrapper {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        border-top: 1px solid #DDD;
+        background: #FFF;
+
+        #course-popup__sidebar {
+            overflow: auto;
+            padding: 5px;
+            box-sizing: border-box;
+            flex: 0 0 300px;
+        }
+
+        #course-popup__main {
+            overflow: auto;
+            flex: 1;
+            padding: 5px;
+            border-left: 1px solid #DDD;
         }
     }
 }

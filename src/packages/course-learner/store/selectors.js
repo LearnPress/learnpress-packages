@@ -1,3 +1,5 @@
+import {select} from '@wordpress/data';
+
 const {get} = lodash;
 
 export function hasEnrolled(state) {
@@ -14,6 +16,12 @@ export const getUserData = (state) => {
     const {courseLearner} = state;
 
     return courseLearner.userData;
+}
+
+export const isRequestingEnrollCourse = (state) => {
+    const {courseLearner} = state;
+
+    return courseLearner.isRequestingEnrollCourse === true;
 }
 
 /**
@@ -61,4 +69,40 @@ export const getTabs = (state) => {
     const {courseLearner} = state;
 
     return courseLearner.courseTabs || {};
+}
+
+/**
+ * Get prop value of course settings.
+ *
+ * @param state
+ * @param prop
+ * @return {*}
+ */
+export function getCourseProp(state, prop) {
+    const {courseLearner} = state;
+
+    return courseLearner[prop];
+}
+
+export function isOpeningCourseItem(state) {
+    const {courseLearner} = state;
+
+    return courseLearner.openCourseItem;
+}
+
+export function getCurrentItemResults(state) {
+    const {courseLearner} = state;
+
+    return courseLearner.currentItemResults;
+}
+
+export const getCompletedItems = function (state) {
+    const courseItems = get(state, 'courseUser.courseItems') || {};
+    return Object.values(courseItems).reduce((memo, item) => {
+        if (item.status === 'completed') {
+            memo[item.id] = item;
+        }
+
+        return memo;
+    }, {})
 }

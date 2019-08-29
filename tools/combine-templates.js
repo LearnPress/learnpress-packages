@@ -16,18 +16,29 @@ const getPackageName = function getPackageName(p) {
 
 const getEntries = function getEntries(entries) {
     return entries.reduce((memo, entry) => {
-        const name = entry.replace(packageDir+'/templates', '');
+        const name = entry.replace(packageDir + '/templates', '');
 
         memo[name] = entry.replace(path.dirname(packageDir), '.')
         return memo;
     }, {});
 }
+
+const xyz= function(){
+    const entries = glob.sync('/Users/tu/Documents/dev/WordPress/gutenberg/build/**/index.js')
+
+
+
+    console.log(entries.map((a)=>{
+        return a.replace('/Users/tu/Documents/dev/WordPress/gutenberg/build/', '').replace('/index.js', '')
+    }).join(' '))
+}
 module.exports = function () {
-    const entries = (glob.sync(packageDir + '/templates/**/*.js', {"ignore": ['**/build/**/*', '*/index.js', '**/template.js']}));
-    if (entries[0].match(/templates\/index.js/)) {
-        entries.splice(0, 1);
-    }
-    console.log(getEntries(entries))
+    const entries = (glob.sync(packageDir + '/templates/**/*.js', {"ignore": ['**/build/**/*']})).filter((t) => {
+        return !(t.match(/templates\/index.js/) || t.match(/templates\/hooks.js/));
+    });
+
+    console.log(entries)
+
     return {
         entry: getEntries(entries),
         output: {
@@ -61,7 +72,7 @@ module.exports = function () {
                                 const packageName = getPackageName(entry)
 
                                 return 'export {default as ' + packageName + '} from "./' + entry + '"';
-                            }).join("\n") + "\n// For watching files change\n" + '// export const rand = function(){ return ' + Math.random() + '}'
+                            }).join("\n") + "\n// For watching files change\n" + '// export const rand = function(){ return \'' + new Date() + '\'}'
                     }
                 }
             })

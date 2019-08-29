@@ -61,12 +61,14 @@ class CourseTabs extends Component {
                 activeTab: tabId
             };
         });
+
+        console.log(window.location.href)
     }
 
     tabContent(content, tabId, theTab) {
         const callback = window[theTab.callback] || function () {
                 return content;
-            }
+            };
 
         return callback.apply(null, [this, ...arguments]);
     }
@@ -81,7 +83,7 @@ class CourseTabs extends Component {
         const {tabs} = this.props;
 
         return (
-            <div id="learn-press-course-tabs">
+            <div id="learn-press-course-tabs">asdasdasda
                 <ul className="learn-press-nav-tabs course-nav-tabs">
                     {
                         Object.keys(tabs).map((tabId) => {
@@ -93,7 +95,7 @@ class CourseTabs extends Component {
                             }
 
                             return (
-                                <li className={ tabClass.join(' ') }>
+                                <li className={ tabClass.join(' ') } key={ theTab.id }>
                                     <a href={ '?tab=' + theTab.id } data-tab={ '#' + theTab.id }
                                        onClick={(e) => {
                                            this.selectTab(e, tabId)
@@ -116,13 +118,14 @@ class CourseTabs extends Component {
                             }
 
                         return this.state.activeTab === tabId &&
-                            <div className={ tabClass.join(' ') } id={ theTab.id }>
-                                <TabContent tabs={ this }/>
+                            <div className={ tabClass.join(' ') } id={ theTab.id } key={ theTab.id }>
+                                <TabContent tabs={ this } key={ theTab.id }/>
                             </div>
                     })
                 }
 
                 {Template.get('single-course/tabs')}
+
             </div>
         )
     }

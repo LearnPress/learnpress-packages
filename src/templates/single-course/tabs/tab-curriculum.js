@@ -15,7 +15,7 @@ class TabCurriculum extends wp.element.Component {
             <div>
                 {
                     sections.map((section) => {
-                        return <Section section={ section } items={items} />
+                        return <Section section={ section } items={items} key={section.id} />
                     })
                 }
             </div>

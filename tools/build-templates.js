@@ -41,14 +41,19 @@ const buildPath = baseDir + '/build';
 //const buildConfig = require('./tools/build');
 const {camelCaseDash} = require('@wordpress/scripts/utils');
 const packageDir = baseDir + '/src/';
-const packages = {
+const {packages} = require('../config.json');
+
+/*const packages = {
     'course-learner': `file:${packageDir}packages/course-learner`,
     'course-curriculum': `file:${packageDir}packages/course-curriculum`,
     'course-progress': `file:${packageDir}packages/course-progress`,
     'course-overview': `file:${packageDir}packages/course-overview`,
     'blocks': `file:${packageDir}packages/blocks`,
     'components': `file:${packageDir}packages/components`,
-};
+    'data-controls': `file:${packageDir}packages/data-controls`,
+    'notices': `file:${packageDir}packages/notices`,
+    'data': `file:${packageDir}packages/data`,
+};*/
 
 const editorPackages = Object.keys(packages);
 const {
@@ -73,7 +78,6 @@ module.exports = function (env = {environment: "production", watch: false, build
 	const entries = toObject(glob.sync(packageDir + 'templates/index.js', {"ignore":['**/build/**/*']}));
 	var rimraf = require("rimraf");
 	rimraf.sync(packageDir + 'templates/build');
-	console.log(packageDir+'templates/index.js')
     const config = {
         mode,
         entry: toObject([packageDir+'templates/index.js']),
@@ -119,8 +123,6 @@ module.exports = function (env = {environment: "production", watch: false, build
                             break;
                     }
 					
-					console.log('XXX', rawRequest, p)
-
                     if (rawRequest) {
                         return basename(rawRequest);
 						

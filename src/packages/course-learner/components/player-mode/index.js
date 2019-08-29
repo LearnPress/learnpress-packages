@@ -18,11 +18,8 @@ class PlayerMode extends Component{
         } = this.props;
 
         return (
-            <div>
-                Player Mode 
+            <div className="course-player">
                 { children }
-				
-				------
             </div>
         )
     }

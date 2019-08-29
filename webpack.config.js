@@ -42,15 +42,19 @@ const buildPath = __dirname + '/build';
 //const buildConfig = require('./tools/build');
 const {camelCaseDash} = require('@wordpress/scripts/utils');
 const packageDir = __dirname + '/src/';
-const packages = {
-    'course-learner': `file:${packageDir}packages/course-learner`,
-    'course-curriculum': `file:${packageDir}packages/course-curriculum`,
-    'course-progress': `file:${packageDir}packages/course-progress`,
-    'course-overview': `file:${packageDir}packages/course-overview`,
-    'blocks': `file:${packageDir}packages/blocks`,
-    'components': `file:${packageDir}packages/components`,
-    'utils': `file:${packageDir}packages/utils`,
-};
+const {packages} = require('./config.json');
+/*{
+ 'course-learner': `file:${packageDir}packages/course-learner`,
+ 'course-curriculum': `file:${packageDir}packages/course-curriculum`,
+ 'course-progress': `file:${packageDir}packages/course-progress`,
+ 'course-overview': `file:${packageDir}packages/course-overview`,
+ 'blocks': `file:${packageDir}packages/blocks`,
+ 'components': `file:${packageDir}packages/components`,
+ 'data-controls': `file:${packageDir}packages/data-controls`,
+ 'data': `file:${packageDir}packages/data`,
+ 'notices': `file:${packageDir}packages/notices`,
+ 'utils': `file:${packageDir}packages/utils`,
+ };*/
 
 const editorPackages = Object.keys(packages);
 const {
@@ -87,11 +91,7 @@ module.exports = function (env = {environment: "production", watch: false, build
                             presets: ['@babel/preset-env']
                         }
                     },
-                },
-                // {
-                //     test: /([a-zA-Z0-9\s_\\.\-\(\):])+(.s?css)$/,
-                //     use: blocksCSSPlugin.extract(extractConfig),
-                // },
+                }
             ],
         },
         plugins: [
@@ -146,27 +146,27 @@ module.exports = function (env = {environment: "production", watch: false, build
                 library: 'LP'
             }),
 
-            new CopyPlugin(editorPackages.map((name)=>{
+            new CopyPlugin(editorPackages.map((name) => {
                 return {
-                    from: packageDir+`/packages/${name}/package.json`,
-                    to: path.resolve(__dirname, 'build')+`/${name}/`
+                    from: packageDir + `/packages/${name}/package.json`,
+                    to: path.resolve(__dirname, 'build') + `/${name}/`
                 }
-            }).concat(editorPackages.map((name)=>{
+            }).concat(editorPackages.map((name) => {
                 return {
-                    from: path.resolve(__dirname, 'build')+`/${name}/index.js.map`,
-                    to: packageDir+`/assets/js/${name}.js.map`
+                    from: path.resolve(__dirname, 'build') + `/${name}/index.js.map`,
+                    to: packageDir + `/assets/js/${name}.js.map`
                 }
             }))),
 
             new MergeIntoSingleFilePlugin({
                 files: editorPackages.reduce((memo, packageName) => {
                     const name = `../src/assets/js/${ packageName }.js`;
-                    memo[name] = [__dirname+`/build/${packageName}/index.js`];
+                    memo[name] = [__dirname + `/build/${packageName}/index.js`];
                     return memo;
                 }, {}),
                 transform: editorPackages.reduce((memo, packageName) => {
                     const name = `../src/assets/js/${ packageName }.js`;
-                    memo[name] = function(code){
+                    memo[name] = function (code) {
                         return code.replace(/index.js.map/, `${packageName}.js.map`);
                     }
                     return memo;

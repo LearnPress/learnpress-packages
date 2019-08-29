@@ -1,8 +1,8 @@
-const {hooks} = LP.utils;
+const {hooks, trailingSlashIt, setUrl} = LP.utils;
 const {compose} = wp.compose;
 const {Component} = wp.element;
 const {withSelect} = wp.data;
-const {pickBy, isEmpty} = lodash;
+const {pickBy, isEmpty, dropRight} = lodash;
 
 class CourseTabs extends Component {
     constructor() {
@@ -20,6 +20,13 @@ class CourseTabs extends Component {
     }
 
     getDefaultTabId(tabs) {
+
+        const activeId = this.getTabFromPermalink();
+
+        if(activeId){
+            return activeId;
+        }
+
         tabs = tabs || this.props.tabs;
 
         // Pick the tab is active
@@ -51,8 +58,6 @@ class CourseTabs extends Component {
             return {activeTab: this.getDefaultTabId(nextProps.tabs)}
         })
 
-
-        console.log('???', this.getDefaultTabId(nextProps.tabs))
     }
 
     /**
@@ -60,6 +65,7 @@ class CourseTabs extends Component {
      * @param tabId
      */
     updateTab(tabId) {
+
         this.setState((state) => {
             if (state.activeTab === tabId) {
                 return false;
@@ -69,6 +75,25 @@ class CourseTabs extends Component {
                 activeTab: tabId
             };
         });
+
+        var permalink = window.location.href;
+        var baseUrl = this.props.courseBaseUrl;
+        var query = '';
+
+        if (permalink.match(/\?/)) {
+            query = '?' + permalink.split('?')[1];
+        } else if (permalink.match(/&/)) {
+            query = '&' + permalink.split('&')[1];
+        }
+
+        baseUrl = [trailingSlashIt(baseUrl, false)].concat(tabId).join('/');
+        setUrl(trailingSlashIt(baseUrl) + query);
+    }
+
+    getTabFromPermalink() {
+        const baseUrl = this.props.courseBaseUrl;
+
+        return window.location.href.replace(baseUrl, '').split(/(\/|\?|&)/)[0];
     }
 
     tabContent(content, tabId, theTab) {
@@ -123,10 +148,11 @@ class CourseTabs extends Component {
 
 export default compose([
     withSelect((select) => {
-        const {getTabs} = select('course-learner/course');
+        const {getTabs, getCourseProp} = select('course-learner/course');
 
         return {
-            tabs: getTabs()
+            tabs: getTabs(),
+            courseBaseUrl: getCourseProp('coursePermalink')
         }
     })
 ])(CourseTabs);

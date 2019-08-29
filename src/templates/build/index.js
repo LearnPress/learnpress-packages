@@ -87,131 +87,71 @@ this["LP"] = this["LP"] || {}; this["LP"]["Templates"] =
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/templates/hooks.js":
-/*!********************************!*\
-  !*** ./src/templates/hooks.js ***!
-  \********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/**
- * Test js hooks
- */
-jQuery(function () {
-  var hooks = LP.utils.hooks;
-  return;
-  hooks.addAction('before-course-landing', function () {
-    return React.createElement('div', {
-      dangerouslySetInnerHTML: {
-        __html: 'Hello, <strong>Admin</strong>'
-      }
-    });
-  }, -40);
-  hooks.addAction('before-course-landing', function () {
-    return React.createElement('div', {
-      dangerouslySetInnerHTML: {
-        __html: 'You are student'
-      }
-    });
-  }, 10);
-  hooks.addAction('before-course-landing', function () {
-    return React.createElement('div', {
-      dangerouslySetInnerHTML: {
-        __html: '#1111'
-      }
-    });
-  }, 1);
-  hooks.addAction('before-course-landing', function () {
-    return React.createElement('div', {
-      dangerouslySetInnerHTML: {
-        __html: 'YEP!'
-      }
-    });
-  }, 10);
-  hooks.addAction('after-course-landing', function () {
-    return React.createElement('div', {
-      dangerouslySetInnerHTML: {
-        __html: 'Continue...'
-      }
-    });
-  });
-});
-
-/***/ }),
-
 /***/ "./src/templates/index.js":
 /*!********************************!*\
   !*** ./src/templates/index.js ***!
   \********************************/
-/*! exports provided: Hooks, Index, SingleCourse_Buttons_Enroll, SingleCourse_Buttons_Purchase, SingleCourse_Buttons_Submit, SingleCourse_ContentLanding, SingleCourse_ContentLearning, SingleCourse_Content, SingleCourse_CourseTabs, SingleCourse_Lesson_ButtonSubmit, SingleCourse_Lesson_Content, SingleCourse_Lesson_Index, SingleCourse_Progress, SingleCourse_Quiz_Buttons_Start, SingleCourse_Quiz_Content, SingleCourse_Quiz_Index, SingleCourse_Section_Index, SingleCourse_Tabs_Index, SingleCourse_Tabs_TabCurriculum, SingleCourse_Tabs_TabInstructor, SingleCourse_Tabs_TabOverview */
+/*! exports provided: SingleCourse_Buttons_Enroll, SingleCourse_Buttons_Purchase, SingleCourse_Buttons_Submit, SingleCourse_ContentLanding, SingleCourse_ContentLearning, SingleCourse_Content, SingleCourse_CourseTabs, SingleCourse_Lesson_ButtonSubmit, SingleCourse_Lesson_Content, SingleCourse_Lesson_Index, SingleCourse_Progress, SingleCourse_Quiz_Buttons_Start, SingleCourse_Quiz_Content, SingleCourse_Quiz_Index, SingleCourse_Section_Index, SingleCourse_Tabs_Index, SingleCourse_Tabs_TabCurriculum, SingleCourse_Tabs_TabInstructor, SingleCourse_Tabs_TabOverview */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _hooks_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./hooks.js */ "./src/templates/hooks.js");
-/* harmony import */ var _hooks_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_hooks_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (default from non-harmony) */ __webpack_require__.d(__webpack_exports__, "Hooks", function() { return _hooks_js__WEBPACK_IMPORTED_MODULE_0___default.a; });
-/* harmony import */ var _index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.js */ "./src/templates/index.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Index", function() { return _index_js__WEBPACK_IMPORTED_MODULE_1__["default"]; });
+/* harmony import */ var _single_course_buttons_enroll_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./single-course/buttons/enroll.js */ "./src/templates/single-course/buttons/enroll.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Buttons_Enroll", function() { return _single_course_buttons_enroll_js__WEBPACK_IMPORTED_MODULE_0__["default"]; });
 
-/* harmony import */ var _single_course_buttons_enroll_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./single-course/buttons/enroll.js */ "./src/templates/single-course/buttons/enroll.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Buttons_Enroll", function() { return _single_course_buttons_enroll_js__WEBPACK_IMPORTED_MODULE_2__["default"]; });
+/* harmony import */ var _single_course_buttons_purchase_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./single-course/buttons/purchase.js */ "./src/templates/single-course/buttons/purchase.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Buttons_Purchase", function() { return _single_course_buttons_purchase_js__WEBPACK_IMPORTED_MODULE_1__["default"]; });
 
-/* harmony import */ var _single_course_buttons_purchase_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./single-course/buttons/purchase.js */ "./src/templates/single-course/buttons/purchase.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Buttons_Purchase", function() { return _single_course_buttons_purchase_js__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+/* harmony import */ var _single_course_buttons_submit_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./single-course/buttons/submit.js */ "./src/templates/single-course/buttons/submit.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Buttons_Submit", function() { return _single_course_buttons_submit_js__WEBPACK_IMPORTED_MODULE_2__["default"]; });
 
-/* harmony import */ var _single_course_buttons_submit_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./single-course/buttons/submit.js */ "./src/templates/single-course/buttons/submit.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Buttons_Submit", function() { return _single_course_buttons_submit_js__WEBPACK_IMPORTED_MODULE_4__["default"]; });
+/* harmony import */ var _single_course_content_landing_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./single-course/content-landing.js */ "./src/templates/single-course/content-landing.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_ContentLanding", function() { return _single_course_content_landing_js__WEBPACK_IMPORTED_MODULE_3__["default"]; });
 
-/* harmony import */ var _single_course_content_landing_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./single-course/content-landing.js */ "./src/templates/single-course/content-landing.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_ContentLanding", function() { return _single_course_content_landing_js__WEBPACK_IMPORTED_MODULE_5__["default"]; });
+/* harmony import */ var _single_course_content_learning_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./single-course/content-learning.js */ "./src/templates/single-course/content-learning.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_ContentLearning", function() { return _single_course_content_learning_js__WEBPACK_IMPORTED_MODULE_4__["default"]; });
 
-/* harmony import */ var _single_course_content_learning_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./single-course/content-learning.js */ "./src/templates/single-course/content-learning.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_ContentLearning", function() { return _single_course_content_learning_js__WEBPACK_IMPORTED_MODULE_6__["default"]; });
+/* harmony import */ var _single_course_content_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./single-course/content.js */ "./src/templates/single-course/content.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Content", function() { return _single_course_content_js__WEBPACK_IMPORTED_MODULE_5__["default"]; });
 
-/* harmony import */ var _single_course_content_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./single-course/content.js */ "./src/templates/single-course/content.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Content", function() { return _single_course_content_js__WEBPACK_IMPORTED_MODULE_7__["default"]; });
+/* harmony import */ var _single_course_course_tabs_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./single-course/course-tabs.js */ "./src/templates/single-course/course-tabs.js");
+/* harmony import */ var _single_course_course_tabs_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_single_course_course_tabs_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony reexport (default from non-harmony) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_CourseTabs", function() { return _single_course_course_tabs_js__WEBPACK_IMPORTED_MODULE_6___default.a; });
+/* harmony import */ var _single_course_lesson_button_submit_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./single-course/lesson/button-submit.js */ "./src/templates/single-course/lesson/button-submit.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Lesson_ButtonSubmit", function() { return _single_course_lesson_button_submit_js__WEBPACK_IMPORTED_MODULE_7__["default"]; });
 
-/* harmony import */ var _single_course_course_tabs_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./single-course/course-tabs.js */ "./src/templates/single-course/course-tabs.js");
-/* harmony import */ var _single_course_course_tabs_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_single_course_course_tabs_js__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony reexport (default from non-harmony) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_CourseTabs", function() { return _single_course_course_tabs_js__WEBPACK_IMPORTED_MODULE_8___default.a; });
-/* harmony import */ var _single_course_lesson_button_submit_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./single-course/lesson/button-submit.js */ "./src/templates/single-course/lesson/button-submit.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Lesson_ButtonSubmit", function() { return _single_course_lesson_button_submit_js__WEBPACK_IMPORTED_MODULE_9__["default"]; });
+/* harmony import */ var _single_course_lesson_content_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./single-course/lesson/content.js */ "./src/templates/single-course/lesson/content.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Lesson_Content", function() { return _single_course_lesson_content_js__WEBPACK_IMPORTED_MODULE_8__["default"]; });
 
-/* harmony import */ var _single_course_lesson_content_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./single-course/lesson/content.js */ "./src/templates/single-course/lesson/content.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Lesson_Content", function() { return _single_course_lesson_content_js__WEBPACK_IMPORTED_MODULE_10__["default"]; });
+/* harmony import */ var _single_course_lesson_index_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./single-course/lesson/index.js */ "./src/templates/single-course/lesson/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Lesson_Index", function() { return _single_course_lesson_index_js__WEBPACK_IMPORTED_MODULE_9__["default"]; });
 
-/* harmony import */ var _single_course_lesson_index_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./single-course/lesson/index.js */ "./src/templates/single-course/lesson/index.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Lesson_Index", function() { return _single_course_lesson_index_js__WEBPACK_IMPORTED_MODULE_11__["default"]; });
+/* harmony import */ var _single_course_progress_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./single-course/progress.js */ "./src/templates/single-course/progress.js");
+/* harmony import */ var _single_course_progress_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_single_course_progress_js__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony reexport (default from non-harmony) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Progress", function() { return _single_course_progress_js__WEBPACK_IMPORTED_MODULE_10___default.a; });
+/* harmony import */ var _single_course_quiz_buttons_start_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./single-course/quiz/buttons/start.js */ "./src/templates/single-course/quiz/buttons/start.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Quiz_Buttons_Start", function() { return _single_course_quiz_buttons_start_js__WEBPACK_IMPORTED_MODULE_11__["default"]; });
 
-/* harmony import */ var _single_course_progress_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./single-course/progress.js */ "./src/templates/single-course/progress.js");
-/* harmony import */ var _single_course_progress_js__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_single_course_progress_js__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony reexport (default from non-harmony) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Progress", function() { return _single_course_progress_js__WEBPACK_IMPORTED_MODULE_12___default.a; });
-/* harmony import */ var _single_course_quiz_buttons_start_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./single-course/quiz/buttons/start.js */ "./src/templates/single-course/quiz/buttons/start.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Quiz_Buttons_Start", function() { return _single_course_quiz_buttons_start_js__WEBPACK_IMPORTED_MODULE_13__["default"]; });
+/* harmony import */ var _single_course_quiz_content_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./single-course/quiz/content.js */ "./src/templates/single-course/quiz/content.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Quiz_Content", function() { return _single_course_quiz_content_js__WEBPACK_IMPORTED_MODULE_12__["default"]; });
 
-/* harmony import */ var _single_course_quiz_content_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./single-course/quiz/content.js */ "./src/templates/single-course/quiz/content.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Quiz_Content", function() { return _single_course_quiz_content_js__WEBPACK_IMPORTED_MODULE_14__["default"]; });
+/* harmony import */ var _single_course_quiz_index_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./single-course/quiz/index.js */ "./src/templates/single-course/quiz/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Quiz_Index", function() { return _single_course_quiz_index_js__WEBPACK_IMPORTED_MODULE_13__["default"]; });
 
-/* harmony import */ var _single_course_quiz_index_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./single-course/quiz/index.js */ "./src/templates/single-course/quiz/index.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Quiz_Index", function() { return _single_course_quiz_index_js__WEBPACK_IMPORTED_MODULE_15__["default"]; });
+/* harmony import */ var _single_course_section_index_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./single-course/section/index.js */ "./src/templates/single-course/section/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Section_Index", function() { return _single_course_section_index_js__WEBPACK_IMPORTED_MODULE_14__["default"]; });
 
-/* harmony import */ var _single_course_section_index_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./single-course/section/index.js */ "./src/templates/single-course/section/index.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Section_Index", function() { return _single_course_section_index_js__WEBPACK_IMPORTED_MODULE_16__["default"]; });
+/* harmony import */ var _single_course_tabs_index_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./single-course/tabs/index.js */ "./src/templates/single-course/tabs/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Tabs_Index", function() { return _single_course_tabs_index_js__WEBPACK_IMPORTED_MODULE_15__["default"]; });
 
-/* harmony import */ var _single_course_tabs_index_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./single-course/tabs/index.js */ "./src/templates/single-course/tabs/index.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Tabs_Index", function() { return _single_course_tabs_index_js__WEBPACK_IMPORTED_MODULE_17__["default"]; });
+/* harmony import */ var _single_course_tabs_tab_curriculum_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./single-course/tabs/tab-curriculum.js */ "./src/templates/single-course/tabs/tab-curriculum.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Tabs_TabCurriculum", function() { return _single_course_tabs_tab_curriculum_js__WEBPACK_IMPORTED_MODULE_16__["default"]; });
 
-/* harmony import */ var _single_course_tabs_tab_curriculum_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./single-course/tabs/tab-curriculum.js */ "./src/templates/single-course/tabs/tab-curriculum.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Tabs_TabCurriculum", function() { return _single_course_tabs_tab_curriculum_js__WEBPACK_IMPORTED_MODULE_18__["default"]; });
+/* harmony import */ var _single_course_tabs_tab_instructor_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./single-course/tabs/tab-instructor.js */ "./src/templates/single-course/tabs/tab-instructor.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Tabs_TabInstructor", function() { return _single_course_tabs_tab_instructor_js__WEBPACK_IMPORTED_MODULE_17__["default"]; });
 
-/* harmony import */ var _single_course_tabs_tab_instructor_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./single-course/tabs/tab-instructor.js */ "./src/templates/single-course/tabs/tab-instructor.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Tabs_TabInstructor", function() { return _single_course_tabs_tab_instructor_js__WEBPACK_IMPORTED_MODULE_19__["default"]; });
-
-/* harmony import */ var _single_course_tabs_tab_overview_js__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./single-course/tabs/tab-overview.js */ "./src/templates/single-course/tabs/tab-overview.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Tabs_TabOverview", function() { return _single_course_tabs_tab_overview_js__WEBPACK_IMPORTED_MODULE_20__["default"]; });
-
-
+/* harmony import */ var _single_course_tabs_tab_overview_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./single-course/tabs/tab-overview.js */ "./src/templates/single-course/tabs/tab-overview.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Tabs_TabOverview", function() { return _single_course_tabs_tab_overview_js__WEBPACK_IMPORTED_MODULE_18__["default"]; });
 
 
 
@@ -232,7 +172,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
  // For watching files change
-// export const rand = function(){ return 0.34477967656057684}
+// export const rand = function(){ return 'Thu Aug 29 2019 13:36:07 GMT+0700 (Indochina Time)'}
 
 /***/ }),
 
@@ -399,8 +339,12 @@ function (_Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _learnpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @learnpress/blocks */ "@learnpress/blocks");
 /* harmony import */ var _learnpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_learnpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _learnpress_course_progress__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @learnpress/course-progress */ "@learnpress/course-progress");
-/* harmony import */ var _learnpress_course_progress__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_learnpress_course_progress__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _learnpress_course_learner__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @learnpress/course-learner */ "@learnpress/course-learner");
+/* harmony import */ var _learnpress_course_learner__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_learnpress_course_learner__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _learnpress_course_curriculum__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @learnpress/course-curriculum */ "@learnpress/course-curriculum");
+/* harmony import */ var _learnpress_course_curriculum__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_learnpress_course_curriculum__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _learnpress_course_progress__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @learnpress/course-progress */ "@learnpress/course-progress");
+/* harmony import */ var _learnpress_course_progress__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_learnpress_course_progress__WEBPACK_IMPORTED_MODULE_3__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -421,8 +365,19 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+
 var Template = LP.components.Template;
-var hooks = LP.utils.hooks;
+var hooks = LP.utils.hooks; // function CoursePopup(props) {
+//     return <div id="course-popup">
+//         <div id="course-popup-sidebar">
+//         <CourseCurriculum/>
+//         </div>
+//         <div id="course-popup-main">
+//         {JSON.stringify(props.openCourseItem)}
+//         </div>
+//     </div>
+// }
 
 var ContentLanding =
 /*#__PURE__*/
@@ -438,14 +393,18 @@ function (_wp$element$Component) {
   _createClass(ContentLanding, [{
     key: "render",
     value: function render() {
-      var enrollCourse = this.props.enrollCourse;
+      var _this$props = this.props,
+          enrollCourse = _this$props.enrollCourse,
+          openItem = _this$props.openItem;
       return React.createElement("div", {
         className: "learnpress-landing"
       },
       /**
        * Hook
        */
-      hooks.doAction('before-course-landing'), React.createElement(_learnpress_blocks__WEBPACK_IMPORTED_MODULE_0__["CourseTabs"], null),
+      hooks.doAction('before-course-landing'), !this.props.openCourseItem && React.createElement(_learnpress_blocks__WEBPACK_IMPORTED_MODULE_0__["CourseTabs"], null), !!this.props.openCourseItem && React.createElement(_learnpress_course_learner__WEBPACK_IMPORTED_MODULE_1__["CoursePopup"], {
+        openCourseItem: this.props.openCourseItem
+      }),
       /**
        * Hook
        */
@@ -1051,6 +1010,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 var _lodash = lodash,
     isNumber = _lodash.isNumber;
+var setUrl = LP.utils.setUrl;
 
 var CourseSection =
 /*#__PURE__*/
@@ -1064,8 +1024,28 @@ function (_wp$element$Component) {
   }
 
   _createClass(CourseSection, [{
+    key: "isCurrentItem",
+    value: function isCurrentItem(itemId) {
+      var activeCourseItem = this.props.activeCourseItem;
+      return !!activeCourseItem && activeCourseItem.id == itemId;
+    }
+  }, {
+    key: "isCompletedItem",
+    value: function isCompletedItem(itemId) {
+      var completedItems = this.props.completedItems;
+      return completedItems && completedItems[itemId];
+    }
+  }, {
+    key: "openCourseItem",
+    value: function openCourseItem(item) {
+      var openCourseItem = this.props.openCourseItem;
+      openCourseItem(item);
+    }
+  }, {
     key: "renderItem",
     value: function renderItem(item) {
+      var _this = this;
+
       var items = this.props.items;
 
       if (isNumber(item)) {
@@ -1076,28 +1056,49 @@ function (_wp$element$Component) {
         return '';
       }
 
-      return React.createElement("h4", null, React.createElement("a", {
-        href: item.permalink
-      }, item.name));
+      var classes = ['course-item'];
+
+      if (this.isCurrentItem(item.id)) {
+        classes.push('active');
+      }
+
+      return React.createElement("div", {
+        className: classes.join(' '),
+        key: item.id
+      }, React.createElement("h6", {
+        className: "item-title"
+      }, React.createElement("a", {
+        href: item.permalink,
+        onClick: function onClick(e) {
+          e.preventDefault();
+
+          _this.openCourseItem(item);
+        }
+      }, item.name, this.isCompletedItem(item.id) && React.createElement("span", null, "Completed"))));
     }
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var _this$props = this.props,
           section = _this$props.section,
           clickSection = _this$props.clickSection,
-          renderItem = _this$props.renderItem,
           className = _this$props.className;
+      section.items.map(function (item) {
+        if (_this2.isCurrentItem(item)) {
+          className.push('active');
+          return false;
+        }
+      });
       return React.createElement("div", {
         className: className.join(' ')
       }, React.createElement("h4", {
         onClick: clickSection
-      }, section.title), React.createElement("div", {
+      }, section.title), React.createElement("p", null, section.desc), React.createElement("div", {
         className: "course-items"
       }, section.items.map(function (item) {
-        return React.createElement("div", {
-          className: "course-item"
-        }, renderItem(item));
+        return _this2.renderItem(item);
       })));
     }
   }]);
@@ -1172,7 +1173,8 @@ function (_Component) {
         }
 
         return React.createElement("li", {
-          className: tabClass.join(' ')
+          className: tabClass.join(' '),
+          key: theTab.id
         }, React.createElement("a", {
           href: '?tab=' + theTab.id,
           "data-tab": '#' + theTab.id,
@@ -1189,7 +1191,8 @@ function (_Component) {
         var tabClass = ['course-tab-panel-' + tabId, 'course-tab-panel active'];
         return isActiveTab(tabId) && React.createElement("div", {
           className: tabClass.join(' '),
-          id: theTab.id
+          id: theTab.id,
+          key: theTab.id
         }, displayTab(theTab, _this));
       }));
     }
@@ -1258,7 +1261,8 @@ function (_wp$element$Component) {
       return React.createElement("div", null, sections.map(function (section) {
         return React.createElement(_learnpress_course_curriculum__WEBPACK_IMPORTED_MODULE_0__["Section"], {
           section: section,
-          items: items
+          items: items,
+          key: section.id
         });
       }));
     }
@@ -1425,6 +1429,17 @@ function (_wp$element$Component) {
 /***/ (function(module, exports) {
 
 (function() { module.exports = this["LP"]["courseCurriculum"]; }());
+
+/***/ }),
+
+/***/ "@learnpress/course-learner":
+/*!************************************************!*\
+  !*** external {"this":["LP","courseLearner"]} ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["LP"]["courseLearner"]; }());
 
 /***/ }),
 

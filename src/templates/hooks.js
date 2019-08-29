@@ -5,6 +5,19 @@ jQuery(function () {
 
     var hooks = LP.utils.hooks;
 
+    // hooks.addAction('course-item-extra', function (item) {
+    //
+    //     if (item.type !== 'lp_quiz') {
+    //         return;
+    //     }
+    //
+    //     return React.createElement('div', {
+    //         dangerouslySetInnerHTML: {
+    //             __html: 'Quiz Questions:' + JSON.stringify(item.questions)
+    //         }
+    //     })
+    // })
+
     return;
     hooks.addAction('before-course-landing', function () {
         return React.createElement('div', {

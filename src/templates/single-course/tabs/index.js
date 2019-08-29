@@ -22,7 +22,7 @@ class CourseTabs extends Component {
                             }
 
                             return (
-                                <li className={ tabClass.join(' ') }>
+                                <li className={ tabClass.join(' ') } key={ theTab.id }>
                                     <a href={ '?tab=' + theTab.id } data-tab={ '#' + theTab.id }
                                        onClick={(e) => {
                                            selectTab(e, tabId)
@@ -42,7 +42,7 @@ class CourseTabs extends Component {
                         const tabClass = ['course-tab-panel-' + tabId, 'course-tab-panel active'];
 
                         return isActiveTab(tabId) &&
-                            <div className={ tabClass.join(' ') } id={ theTab.id }>
+                            <div className={ tabClass.join(' ') } id={ theTab.id } key={ theTab.id }>
                                 {displayTab(theTab, this)}
                             </div>
                     })
