@@ -70,7 +70,7 @@ export default compose([
         } = select('course-learner/course');
 
         return {
-            completedItems: getCompletedItems(),
+            completedItems: select('course-learner/user').getCompletedItems(),
             activeCourseItem: isOpeningCourseItem()
         }
     }),

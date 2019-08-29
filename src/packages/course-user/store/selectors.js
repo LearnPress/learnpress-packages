@@ -21,3 +21,22 @@ export function isCompletedItem(state, itemId) {
     const completedItems = select('course-learner/user').getCompletedItems();
     return completedItems && completedItems[itemId];
 }
+
+export function getItemById(state, itemId) {
+    const courseItems = get(state, 'courseItems') || {};
+
+    return Object.values(courseItems).find((item) => {
+        return item.id == itemId
+    });
+}
+
+/**
+ * Get current status of an item in course.
+ *
+ * @param state
+ * @param itemId
+ */
+export function getItemStatus(state, itemId) {
+    const item = select('course-learner/user').getItemById(itemId);
+    return item ? get(item, 'userSettings.status') : '';
+}

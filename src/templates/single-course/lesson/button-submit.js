@@ -13,6 +13,8 @@ class ButtonSubmit extends Component {
 
     updateButton() {
         this.setState({status: 'Completed'});
+
+        wp.data.dispatch('course-learner/user').startQuiz();
     }
 
     render() {

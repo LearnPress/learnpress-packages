@@ -18,11 +18,7 @@ class Buttons extends Component {
     startQuiz = (event) => {
         event.preventDefault();
 
-        this.setState({
-            status: 'started'
-        });
-
-        this.props.startQuiz(1, 2, 3)
+        this.props.startQuiz(this.props.item.id)
     }
 
     navQuiz = (x) => (event) => {
@@ -33,18 +29,13 @@ class Buttons extends Component {
     submitQuiz = (event) => {
         event.preventDefault();
 
-        this.setState({
-            status: 'completed'
-        })
+        this.props.submitQuiz()
     }
 
     redoQuiz = (event) => {
         event.preventDefault();
-        this.setState({
-            status: 'started'
-        });
 
-        this.props.startQuiz(1, 2, 3)
+        this.props.startQuiz(this.props.item.id)
 
     }
 
@@ -57,7 +48,6 @@ class Buttons extends Component {
             completeItem
         } = this.props;
 
-        console.log(this.props)
         return (
             <>
             <button onClick={ this.navQuiz('prev') }>Prev</button>
@@ -70,7 +60,8 @@ class Buttons extends Component {
     render() {
         const {
             status
-        } = this.state;
+        } = this.props;
+
         return (
             <div>
 
@@ -93,23 +84,4 @@ class Buttons extends Component {
     }
 }
 
-export default compose([
-    withSelect((select) => {
-        const {
-            x
-        } = select('course-learner/course');
-
-        return {
-            x
-        }
-    }),
-    withDispatch((dispatch) => {
-        const {
-            startQuiz
-        } = dispatch('course-learner/course');
-
-        return {
-            startQuiz
-        }
-    })
-])(Buttons);
+export default Buttons;

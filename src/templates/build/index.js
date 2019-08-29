@@ -91,7 +91,7 @@ this["LP"] = this["LP"] || {}; this["LP"]["Templates"] =
 /*!********************************!*\
   !*** ./src/templates/index.js ***!
   \********************************/
-/*! exports provided: SingleCourse_Buttons_Enroll, SingleCourse_Buttons_Purchase, SingleCourse_Buttons_Submit, SingleCourse_ContentLanding, SingleCourse_ContentLearning, SingleCourse_Content, SingleCourse_CourseTabs, SingleCourse_Lesson_ButtonSubmit, SingleCourse_Lesson_Content, SingleCourse_Lesson_Index, SingleCourse_Progress, SingleCourse_Quiz_Buttons_Start, SingleCourse_Quiz_Content, SingleCourse_Quiz_Index, SingleCourse_Section_Index, SingleCourse_Tabs_Index, SingleCourse_Tabs_TabCurriculum, SingleCourse_Tabs_TabInstructor, SingleCourse_Tabs_TabOverview */
+/*! exports provided: SingleCourse_Buttons_Enroll, SingleCourse_Buttons_Purchase, SingleCourse_Buttons_Submit, SingleCourse_ContentLanding, SingleCourse_ContentLearning, SingleCourse_Content, SingleCourse_CourseTabs, SingleCourse_Lesson_ButtonSubmit, SingleCourse_Lesson_Content, SingleCourse_Lesson_Index, SingleCourse_Progress, SingleCourse_Quiz_Buttons_Start, SingleCourse_Quiz_Content, SingleCourse_Quiz_Index, SingleCourse_Quiz_Meta, SingleCourse_Section_Index, SingleCourse_Tabs_Index, SingleCourse_Tabs_TabCurriculum, SingleCourse_Tabs_TabInstructor, SingleCourse_Tabs_TabOverview */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -138,20 +138,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _single_course_quiz_index_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./single-course/quiz/index.js */ "./src/templates/single-course/quiz/index.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Quiz_Index", function() { return _single_course_quiz_index_js__WEBPACK_IMPORTED_MODULE_13__["default"]; });
 
-/* harmony import */ var _single_course_section_index_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./single-course/section/index.js */ "./src/templates/single-course/section/index.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Section_Index", function() { return _single_course_section_index_js__WEBPACK_IMPORTED_MODULE_14__["default"]; });
+/* harmony import */ var _single_course_quiz_meta_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./single-course/quiz/meta.js */ "./src/templates/single-course/quiz/meta.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Quiz_Meta", function() { return _single_course_quiz_meta_js__WEBPACK_IMPORTED_MODULE_14__["default"]; });
 
-/* harmony import */ var _single_course_tabs_index_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./single-course/tabs/index.js */ "./src/templates/single-course/tabs/index.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Tabs_Index", function() { return _single_course_tabs_index_js__WEBPACK_IMPORTED_MODULE_15__["default"]; });
+/* harmony import */ var _single_course_section_index_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./single-course/section/index.js */ "./src/templates/single-course/section/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Section_Index", function() { return _single_course_section_index_js__WEBPACK_IMPORTED_MODULE_15__["default"]; });
 
-/* harmony import */ var _single_course_tabs_tab_curriculum_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./single-course/tabs/tab-curriculum.js */ "./src/templates/single-course/tabs/tab-curriculum.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Tabs_TabCurriculum", function() { return _single_course_tabs_tab_curriculum_js__WEBPACK_IMPORTED_MODULE_16__["default"]; });
+/* harmony import */ var _single_course_tabs_index_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./single-course/tabs/index.js */ "./src/templates/single-course/tabs/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Tabs_Index", function() { return _single_course_tabs_index_js__WEBPACK_IMPORTED_MODULE_16__["default"]; });
 
-/* harmony import */ var _single_course_tabs_tab_instructor_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./single-course/tabs/tab-instructor.js */ "./src/templates/single-course/tabs/tab-instructor.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Tabs_TabInstructor", function() { return _single_course_tabs_tab_instructor_js__WEBPACK_IMPORTED_MODULE_17__["default"]; });
+/* harmony import */ var _single_course_tabs_tab_curriculum_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./single-course/tabs/tab-curriculum.js */ "./src/templates/single-course/tabs/tab-curriculum.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Tabs_TabCurriculum", function() { return _single_course_tabs_tab_curriculum_js__WEBPACK_IMPORTED_MODULE_17__["default"]; });
 
-/* harmony import */ var _single_course_tabs_tab_overview_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./single-course/tabs/tab-overview.js */ "./src/templates/single-course/tabs/tab-overview.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Tabs_TabOverview", function() { return _single_course_tabs_tab_overview_js__WEBPACK_IMPORTED_MODULE_18__["default"]; });
+/* harmony import */ var _single_course_tabs_tab_instructor_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./single-course/tabs/tab-instructor.js */ "./src/templates/single-course/tabs/tab-instructor.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Tabs_TabInstructor", function() { return _single_course_tabs_tab_instructor_js__WEBPACK_IMPORTED_MODULE_18__["default"]; });
+
+/* harmony import */ var _single_course_tabs_tab_overview_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./single-course/tabs/tab-overview.js */ "./src/templates/single-course/tabs/tab-overview.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleCourse_Tabs_TabOverview", function() { return _single_course_tabs_tab_overview_js__WEBPACK_IMPORTED_MODULE_19__["default"]; });
+
 
 
 
@@ -172,7 +176,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
  // For watching files change
-// export const rand = function(){ return 'Thu Aug 29 2019 13:36:07 GMT+0700 (Indochina Time)'}
+// export const rand = function(){ return 'Thu Aug 29 2019 15:53:14 GMT+0700 (Indochina Time)'}
 
 /***/ }),
 
@@ -619,6 +623,7 @@ function (_Component) {
       this.setState({
         status: 'Completed'
       });
+      wp.data.dispatch('course-learner/user').startQuiz();
     }
   }, {
     key: "render",
@@ -807,7 +812,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var Component = wp.element.Component;
+var __ = wp.i18n.__;
 
 var ButtonStart =
 /*#__PURE__*/
@@ -820,6 +828,13 @@ function (_Component) {
     _classCallCheck(this, ButtonStart);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ButtonStart).apply(this, arguments));
+
+    _defineProperty(_assertThisInitialized(_this), "startQuiz", function () {
+      return function (event) {
+        event.preventDefault();
+      };
+    });
+
     _this.state = {
       status: 'Start'
     };
@@ -828,19 +843,12 @@ function (_Component) {
   }
 
   _createClass(ButtonStart, [{
-    key: "updateButton",
-    value: function updateButton() {
-      this.setState({
-        status: 'Started'
-      });
-    }
-  }, {
     key: "render",
     value: function render() {
       return React.createElement("button", {
         type: "button",
-        onClick: this.updateButton
-      }, this.state.status);
+        onClick: this.startQuiz
+      }, __('Start', 'learnpress'));
     }
   }]);
 
@@ -978,6 +986,28 @@ function (_Component) {
 }(Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (Quiz);
+
+/***/ }),
+
+/***/ "./src/templates/single-course/quiz/meta.js":
+/*!**************************************************!*\
+  !*** ./src/templates/single-course/quiz/meta.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var __ = wp.i18n.__;
+/* harmony default export */ __webpack_exports__["default"] = (function (props) {
+  var totalQuestion = props.totalQuestion,
+      totalTime = props.totalTime,
+      attempts = props.attempts,
+      passingGrade = props.passingGrade;
+  return React.createElement("div", {
+    className: "quiz-meta"
+  }, React.createElement("div", null, React.createElement("strong", null, __('Time', 'learnpress')), totalTime), React.createElement("div", null, React.createElement("strong", null, __('Questions', 'learnpress')), totalQuestion), React.createElement("div", null, React.createElement("strong", null, __('Attempts', 'learnpress')), attempts), React.createElement("div", null, React.createElement("strong", null, __('Passing Grade', 'learnpress')), passingGrade));
+});
 
 /***/ }),
 

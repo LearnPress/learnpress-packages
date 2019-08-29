@@ -88,3 +88,21 @@ export function* markItemComplete(completed = true, itemId, courseId = 0, userId
 
     console.log(itemResults)
 }
+
+export function startQuiz(quizId, courseId, userId) {
+    return {
+        type: 'START_QUIZ',
+        quizId,
+        courseId,
+        userId
+    }
+}
+
+export function submitQuiz(quizId, courseId, userId) {
+    return {
+        type: 'SUBMIT_QUIZ',
+        quizId,
+        courseId,
+        userId
+    }
+}

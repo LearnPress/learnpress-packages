@@ -12,10 +12,11 @@ export {default as SingleCourse_Progress} from "./single-course/progress.js"
 export {default as SingleCourse_Quiz_Buttons_Start} from "./single-course/quiz/buttons/start.js"
 export {default as SingleCourse_Quiz_Content} from "./single-course/quiz/content.js"
 export {default as SingleCourse_Quiz_Index} from "./single-course/quiz/index.js"
+export {default as SingleCourse_Quiz_Meta} from "./single-course/quiz/meta.js"
 export {default as SingleCourse_Section_Index} from "./single-course/section/index.js"
 export {default as SingleCourse_Tabs_Index} from "./single-course/tabs/index.js"
 export {default as SingleCourse_Tabs_TabCurriculum} from "./single-course/tabs/tab-curriculum.js"
 export {default as SingleCourse_Tabs_TabInstructor} from "./single-course/tabs/tab-instructor.js"
 export {default as SingleCourse_Tabs_TabOverview} from "./single-course/tabs/tab-overview.js"
 // For watching files change
-// export const rand = function(){ return 'Thu Aug 29 2019 13:36:07 GMT+0700 (Indochina Time)'}
+// export const rand = function(){ return 'Thu Aug 29 2019 15:53:14 GMT+0700 (Indochina Time)'}

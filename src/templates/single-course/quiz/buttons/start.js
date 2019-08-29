@@ -1,4 +1,5 @@
 const {Component} = wp.element;
+const { __ } = wp.i18n;
 
 class ButtonStart extends Component {
     constructor() {
@@ -11,12 +12,12 @@ class ButtonStart extends Component {
         this.updateButton = this.updateButton.bind(this);
     }
 
-    updateButton() {
-        this.setState({status: 'Started'});
+    startQuiz = () => (event) =>{
+        event.preventDefault();
     }
 
     render() {
-        return <button type="button" onClick={this.updateButton}>{this.state.status}</button>
+        return <button type="button" onClick={this.startQuiz}>{ __('Start', 'learnpress') }</button>
     }
 }
 

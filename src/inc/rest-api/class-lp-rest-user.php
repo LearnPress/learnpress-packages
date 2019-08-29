@@ -103,31 +103,38 @@ class LP_Rest_User extends LP_Abstract_REST_Controller {
 		$user       = learn_press_get_user( $userId );
 		$courseData = $user->get_course_data( $courseId );
 
-		$response = array();
+		$response = array(
+			'itemId'      => $request['itemId'],
+			'courseId'    => $request['courseId'],
+			'userId'      => $request['userId'],
+			'isCompleted' => $request['completed']
+		);
 
-		if ( ! $courseData ) {
-			$response['success'] = false;
-		} else {
-			$courseItem = $courseData->get_item( $itemId );
+		$defaultCompleteItemTypes = apply_filters( 'learn-press/rest-api/default-completed-item-types', array( LP_LESSON_CPT ) );
 
-			if ( $courseItem ) {
-				$courseItem->set_status( 'completed' );
-				$return = $courseItem->update();
+		if ( $defaultCompleteItemTypes && in_array( get_post_type( $itemId ), $defaultCompleteItemTypes ) ) {
+			if ( ! $courseData ) {
+				$response['success'] = false;
 			} else {
-				$return = $user->complete_lesson( $itemId, $courseId );
-			}
+				$courseItem = $courseData->get_item( $itemId );
 
-			$success  = ! is_wp_error( $return );
-			$response = array(
-				'itemId'      => $request['itemId'],
-				'courseId'    => $request['courseId'],
-				'userId'      => $request['userId'],
-				'isCompleted' => $request['completed'],
-				'success'     => $success,
-				'return'      => $success ? $return : $return->get_error_message()
-			);
+				if ( $courseItem ) {
+					$courseItem->set_status( $isCompleted ? 'completed' : '' );
+					$return = $courseItem->update();
+				} elseif ( $isCompleted ) {
+					$return = $user->complete_lesson( $itemId, $courseId );
+				}
+			}
 		}
 
+		if ( isset( $return ) ) {
+			$success             = ! is_wp_error( $return );
+			$response['success'] = $success;
+			$response['return']  = $success ? $return : $return->get_error_message();
+
+		} else {
+			$response['success'] = false;
+		}
 
 		return rest_ensure_response( $response );
 	}

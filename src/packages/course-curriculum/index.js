@@ -16,7 +16,7 @@ class CourseCurriculum extends Component {
 
     render() {
         const {userData} = this.props;
-
+        console.log(this.props)
         return <>
         {
             LP.components.Template.get('single-course/tabs/tab-curriculum.js', {...this.state, ...this.props})
@@ -32,10 +32,11 @@ export default compose([
             getUserItems,
             getCompletedItems
         } = select('course-learner/course');
+
         return {
             sections: getCourseSections(),
             items: getUserItems(),
-            completedItems: getCompletedItems()
+            completedItems: select('course-learner/user').getCompletedItems()
         }
     })
 ])(CourseCurriculum);
