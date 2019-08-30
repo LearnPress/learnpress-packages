@@ -176,7 +176,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
  // For watching files change
-// export const rand = function(){ return 'Thu Aug 29 2019 15:53:14 GMT+0700 (Indochina Time)'}
+// export const rand = function(){ return 'Fri Aug 30 2019 09:24:57 GMT+0700 (Indochina Time)'}
 
 /***/ }),
 

@@ -3,6 +3,37 @@ import {withDispatch, withSelect} from '@wordpress/data';
 import {compose} from '@wordpress/compose';
 import {boundMethods} from '@learnpress/utils';
 
+export const navPrevNext = (props) => {
+    const {
+        numberPages,
+        onChange
+    } = props;
+
+    return numberPages > 1 ? (
+        <div className="question-number-list">
+            <button onClick={ onChange('prev') }>Prev</button>
+            <button onClick={ onChange('next') }>Next</button>
+        </div>
+    ) : ''
+}
+
+export const navNumbers = (props) => {
+    const {
+        numberPages,
+        onChange
+    } = props;
+
+    return numberPages > 1 ? (
+        <div className="question-number-list">
+            {
+                Array.from(Array(numberPages).keys()).map((i) => {
+                    return <button key={ `page-${i}` } onClick={ onChange(i + 1) }>{ i + 1 }</button>
+                })
+            }
+        </div>
+    ) : ''
+}
+
 class Buttons extends Component {
     constructor() {
         super(...arguments);
@@ -10,8 +41,6 @@ class Buttons extends Component {
         this.state = {
             status: ''
         }
-
-        // boundMethods(this, ['startQuiz', 'navQuiz', 'submitQuiz', 'redoQuiz'])
     }
 
 
@@ -42,16 +71,36 @@ class Buttons extends Component {
     startedButtons() {
 
         const {
-            item,
-            isCompletedItem,
-            markItemIncomplete,
-            completeItem
+            navType,
+            currentPage,
+            numberPages,
+            setPage
         } = this.props;
 
         return (
             <>
-            <button onClick={ this.navQuiz('prev') }>Prev</button>
-            <button onClick={ this.navQuiz('next') }>Next</button>
+            {
+                navType === 'numbers' && navNumbers({
+                    numberPages: numberPages,
+                    onChange: (newPage) => (event) => {
+                        setPage(newPage);
+                    }
+                })
+            }
+
+            {
+                navType === 'prevNext' && navPrevNext({
+                    numberPages: numberPages,
+                    onChange: (nav) => () => {
+                        if (nav !== 'next') {
+                            setPage(currentPage === 1 ? numberPages : currentPage - 1)
+                        } else {
+                            setPage(currentPage === numberPages ? 1 : currentPage + 1);
+                        }
+                    }
+                })
+            }
+
             <button onClick={ this.submitQuiz }>Submit</button>
             </>
         )
@@ -59,11 +108,14 @@ class Buttons extends Component {
 
     render() {
         const {
-            status
+            status,
+            navType
         } = this.props;
 
+        const className = ['quiz-buttons', navType];
+
         return (
-            <div>
+            <div className={ className.join(' ') }>
 
                 {
                     !status &&
@@ -78,7 +130,6 @@ class Buttons extends Component {
                     status === 'completed' &&
                     <button onClick={ this.redoQuiz }>Redo</button>
                 }
-                {JSON.stringify(this.props.item)}
             </div>
         )
     }

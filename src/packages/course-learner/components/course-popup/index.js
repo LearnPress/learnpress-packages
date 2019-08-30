@@ -123,7 +123,16 @@ class CoursePopup extends Component {
                             !!currentItemResults && currentItemResults.id == openCourseItem.id &&
                             <div>
                                 <h4 dangerouslySetInnerHTML={ {__html: currentItemResults.title} }/>
-                                <div dangerouslySetInnerHTML={ {__html: currentItemResults.content} }/>
+
+                                {
+                                    hooks.doAction('course-item-content',
+                                        currentItemResults, {
+                                            isCompletedItem: this.isCompletedItem,
+                                            markItemIncomplete: this.markItemIncomplete,
+                                            completeItem: this.completeItem
+                                        })
+                                }
+
                                 [Status: {!!this.isCompletedItem() ? "Completed" : "InCompleted"}]
                                 {
                                     /**

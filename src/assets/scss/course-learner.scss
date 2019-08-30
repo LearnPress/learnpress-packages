@@ -66,4 +66,11 @@
             border-left: 1px solid #DDD;
         }
     }
+
+    .quiz-buttons {
+        display: flex;
+        button {
+            margin: 0 10px 0 0;
+        }
+    }
 }

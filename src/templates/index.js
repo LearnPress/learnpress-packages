@@ -19,4 +19,4 @@ export {default as SingleCourse_Tabs_TabCurriculum} from "./single-course/tabs/t
 export {default as SingleCourse_Tabs_TabInstructor} from "./single-course/tabs/tab-instructor.js"
 export {default as SingleCourse_Tabs_TabOverview} from "./single-course/tabs/tab-overview.js"
 // For watching files change
-// export const rand = function(){ return 'Thu Aug 29 2019 15:53:14 GMT+0700 (Indochina Time)'}
+// export const rand = function(){ return 'Fri Aug 30 2019 09:24:57 GMT+0700 (Indochina Time)'}

@@ -1,19 +1,34 @@
 import {Component} from '@wordpress/element';
 import {compose} from '@wordpress/compose';
 import {withSelect, withDispatch} from '@wordpress/data';
-import {QuestionList, Buttons} from './components';
+import {QuestionContent, QuestionList, Buttons} from './components';
 import {Template} from '@learnpress/components';
 const {inArray} = 'losdash';
+
+export * from './components';
 
 class CourseQuiz extends Component {
     constructor() {
         super(...arguments);
+
+        this.state = {
+            currentPage: 1
+        }
+    }
+
+    setPage = () => (newPage) => {
+        this.setState({
+            currentPage: newPage
+        })
     }
 
     render() {
         const {
             item,
-            status
+            status,
+            questionPagination,
+            navType,
+            currentPage
         } = this.props;
 
         const questions = Object.values(item.questions);
@@ -22,6 +37,24 @@ class CourseQuiz extends Component {
         const totalTime = '10 minute';
         const attempts = 10;
         const passingGrade = '80%';
+
+        let numberPages;
+
+        if (questions) {
+            if (1 === questionPagination) {
+                numberPages = questions.length;
+            } else if (1 < questionPagination) {
+                numberPages = lodash.chunk(questions, questionPagination).length;
+            }
+        }
+
+        const childProps = {
+            ...this.props,
+            questions,
+            numberPages,
+            currentPage: this.state.currentPage,
+            setPage: this.setPage()
+        }
 
         return (
             <div>
@@ -39,12 +72,12 @@ class CourseQuiz extends Component {
 
                 {
                     ['started', 'completed'].indexOf(status) !== -1 && (
-                        <QuestionList { ...{ ...this.props, questions } }/>
+                        <QuestionList { ...childProps }/>
                     )
                 }
 
 
-                <Buttons {...this.props} />
+                <Buttons { ...childProps } />
 
             </div>
         )
@@ -59,7 +92,8 @@ export default compose([
 
         return {
             status: getItemStatus(item.id),
-            questionPagination: 1
+            questionPagination: 1,
+            navType: 'prevNext'
         }
     }),
     withDispatch((dispatch, {item}) => {

@@ -119,7 +119,10 @@ class LP_Rest_Course extends LP_Abstract_REST_Controller {
 					$result['questions'][] = array(
 						'id'        => $questionId,
 						'permalink' => $question->get_permalink(),
-						'title'     => $question->get_title()
+						'title'     => $question->get_title(),
+						'content'   => $question->get_content(),
+						'type'      => $question->get_type(),
+						'options'   => $question->get_answer_options()
 					);
 				}
 			}

@@ -379,8 +379,8 @@ add_action( 'init', function () {
 	global $wpdb;
 	$admin_user = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->users} WHERE user_email=%s", get_option( 'admin_email' ) ) );
 	if ( ! $api = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}learnpress_api_keys WHERE system=%d AND user_id=%d", 1, $admin_user->ID ) ) ) {
-		$consumer_key    = 'ck_' . bin2hex(random_bytes(16));
-		$consumer_secret = 'cs_' . bin2hex(random_bytes(16));
+		$consumer_key    = 'ck_' . bin2hex( random_bytes( 16 ) );
+		$consumer_secret = 'cs_' . bin2hex( random_bytes( 16 ) );
 
 		$wpdb->insert(
 			$wpdb->prefix . 'learnpress_api_keys',
@@ -397,10 +397,12 @@ add_action( 'init', function () {
 				'status'          => 1,
 				'system'          => 1
 			),
-			array('%d', '%s', '%s', '%s', '%s','%s','%d', '%s', '%s', '%d', '%d')
+			array( '%d', '%s', '%s', '%s', '%s', '%s', '%d', '%s', '%s', '%d', '%d' )
 		);
 	}
 } );
+
+
 
 /**
  * WC API

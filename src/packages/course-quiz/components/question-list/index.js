@@ -1,6 +1,14 @@
 import {Component} from '@wordpress/element';
+import {QuestionContent as X} from '../question-content';
 
-export const showAllQuestions = (props) => {
+/**
+ * Render all questions in single page.
+ *
+ * @param props
+ * @return {XML}
+ * @constructor
+ */
+export const ShowAllQuestions = (props) => {
     const {
         questions
     } = props;
@@ -10,57 +18,62 @@ export const showAllQuestions = (props) => {
             <ul className="question-list">
                 {
                     questions.map((question) => {
-                        return <li key={ question.id }>{ question.title }</li>
+                        return <li key={ `question-${question.id}` }>
+                            <LoopQuestionContent { ... {...props, question} } />
+                        </li>
                     })
                 }
             </ul>
-
-            {
-                navPrevNext({
-                    onChange: function () {
-
-                    }
-                })
-            }
         </div>
     )
 }
 
+export const ShowOrHideQuestion = (props) => {
+    const {
+        question,
+        isCurrent
+    } = props;
+
+    return <li>
+        <LoopQuestionContent {...props} />
+    </li>
+}
+
+/**
+ * @param props
+ * @return {XML}
+ * @constructor
+ */
 export const ShowQuestionsWithPagination1 = (props) => {
     const {
         questions,
-        questionPagination,
-        navType
+        numberPages,
+        currentPage
     } = props;
-
-    const [page, setPage] = useState(0);
 
     return (
         <div>
+            <div>
+                Question { currentPage } of { numberPages }
+            </div>
             <ul className="question-list">
                 {
-                    questions.map((question) => {
-                        return <li key={ question.id }>{ question.title }</li>
+                    questions.map((question, index) => {
+                        const isCurrent = currentPage === (index + 1);
+                        // return currentPage === (index + 1) ? <li key={ `question-${question.id}` }>
+                        //     <LoopQuestionContent { ... { ...props, question } } />
+                        // </li> : ''
+
+                        return <li key={ `question-${question.id}` } style={ {display: isCurrent ? '' : 'none'} } >
+                            <LoopQuestionContent { ... {
+                                ...props,
+                                question,
+                                isCurrent
+                            } } key={ `question-${question.id}` }/>
+                        </li>
                     })
                 }
             </ul>
-
-            {
-                navType === 'numbers' && navNumbers({
-                    numberPages: questions.length,
-                    onChange: function () {
-
-                    }
-                })
-            }
-
-            {
-                navType === 'prevNext' && navPrevNext({
-                    onChange: function () {
-
-                    }
-                })
-            }
         </div>
     )
 }
@@ -69,78 +82,49 @@ export const ShowQuestionsWithPaginationN = (props) => {
     const {
         questions,
         questionPagination,
-        navType
+        numberPages,
+        currentPage
     } = props;
 
     const chunks = lodash.chunk(questions, questionPagination);
+    const start = (currentPage - 1) * questionPagination;
+    const end = start + questionPagination > questions.length ? questions.length : start + questionPagination;
 
     return (
         <div>
+            <div>
+                Page { currentPage } of { numberPages } / Question { start + 1 } to { end } of { questions.length }
+            </div>
             <ul>
                 {
-                    chunks.map((questions, i) => {
+                    chunks.map((questions, pageIndex) => {
                         return (
-                            <li key={ `page-${i}` }>
-                                <ul className="question-list">
-                                    {
-                                        questions.map((question) => {
-                                            return <li key={ `question-${question.id}` }>{ question.title }</li>
-                                        })
-                                    }
-                                </ul>
-                            </li>
+                            currentPage === pageIndex + 1 ?
+                                <li key={ `page-${pageIndex}` }>
+                                    <ul className="question-list">
+                                        {
+                                            questions.map((question) => {
+                                                return <li key={ `question-${question.id}` }>
+                                                    <LoopQuestionContent { ... {...props, question} } />
+                                                </li>
+                                            })
+                                        }
+                                    </ul>
+                                </li>
+                                : ''
                         )
                     })
                 }
             </ul>
-            {
-                navType === 'numbers' && navNumbers({
-                    numberPages: chunks.length,
-                    onChange: function () {
-
-                    }
-                })
-            }
-
-            {
-                navType === 'prevNext' && navPrevNext({
-                    onChange: function () {
-
-                    }
-                })
-            }
         </div>
     )
-}
+};
 
-export const navPrevNext = (props) => {
-    const {
-        onChange
-    } = props;
+export const LoopQuestionContent = (props) => {
+    const {QuestionContent} = LP.courseQuiz;
 
-    return (
-        <div className="question-number-list">
-            <button onClick={ onChange('prev') }>Prev</button>
-            <button onClick={ onChange('next') }>Next</button>
-        </div>
-    )
-}
-
-export const navNumbers = (props) => {
-    const {
-        numberPages,
-        onChange
-    } = props;
-
-    return (
-        <div className="question-number-list">
-            {
-                Array.from(Array(numberPages).keys()).map((i) => {
-                    return <span key={ `page-${i}` } onClick={ onChange(i + 1) }>{ i + 1 }</span>
-                })
-            }
-        </div>
-    )
+    console.log(X)
+    return <QuestionContent {...props} />
 }
 
 
@@ -149,61 +133,33 @@ class QuestionList extends Component {
         super(...arguments);
 
         this.state = {
-            questionPagination: 0,
-            navType: 'numbers'
+            questionPagination: 1,
+            navType: 'numbers',
+            currentPage: 1,
         }
-    }
-
-    setPagination = () => (event) => {
-        event.preventDefault();
-        this.setState({
-            questionPagination: parseInt(this.$questionPagination.value)
-        })
-    }
-
-    setNav = () => (event) => {
-        event.preventDefault();
-        this.setState({
-            navType: this.$navType.value
-        })
     }
 
     render() {
         const {
-            questions
+            questions,
+            questionPagination,
         } = this.props;
 
-        const {
-            questionPagination,
-            navType
-        } = this.state;
-
         return (<>
-        <input type="number" defaultValue="1" ref={ (elem) => {
-            this.$questionPagination = elem
-        }}/>
-        <button onClick={ this.setPagination() }>Set Pagination</button>
-        <select ref={ (elem) => {
-            this.$navType = elem
-        }}>
-            <option value="numbers">Numbers</option>
-            <option value="prevNext">Prev/Next</option>
-        </select>
-        <button onClick={ this.setNav() }>Set Nav</button>
 
         {questionPagination}
         {
-            questions && !questionPagination && showAllQuestions({...this.props, questionPagination, navType})
+            questions && !questionPagination && <ShowAllQuestions { ...this.props } />
         }
 
         {
             questions && 1 === questionPagination &&
-            <ShowQuestionsWithPagination1 { ...{...this.props, questionPagination, navType} }/>
+            <ShowQuestionsWithPagination1 { ...this.props }/>
         }
 
         {
             questions && 1 < questionPagination &&
-            <ShowQuestionsWithPaginationN { ...{...this.props, questionPagination, navType} }/>
+            <ShowQuestionsWithPaginationN { ...this.props }/>
         }
         </>)
     }
